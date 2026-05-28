@@ -1,0 +1,17 @@
+{
+  "total_deals": 338,
+  "total_capital": 6945.0,
+  "total_investors": 1298,
+  "total_projects": 326,
+  "median_deal_size": 5.0,
+  "avg_deal_size": 20.547337278106507,
+  "date_range": "Nov 2024 - Apr 2025",
+  "top_category_by_deals": "Blockchain Service",
+  "top_category_by_capital": "Finance",
+  "infra_deals": 50,
+  "infra_capital": 416.0,
+  "infra_pct_deals": 14.792899408284024,
+  "concentration_50pct": 256,
+  "concentration_80pct": 826,
+  "median_syndicate_size": 6.0
+}

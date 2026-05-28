@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cross-Chain Bridge Volume Analysis | H1 2025</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<style>
+/* ===== DESIGN SYSTEM: Green / Gray / White ===== */
+:root {
+  --g900: #064E3B; --g800: #065F46; --g700: #047857; --g600: #059669;
+  --g500: #10B981; --g400: #34D399; --g300: #6EE7B7; --g200: #A7F3D0; --g100: #D1FAE5; --g50: #ECFDF5;
+  --n900: #111827; --n800: #1F2937; --n700: #374151; --n600: #4B5563;
+  --n500: #6B7280; --n400: #9CA3AF; --n300: #D1D5DB; --n200: #E5E7EB; --n100: #F3F4F6; --n50: #F9FAFB;
+  --white: #FFFFFF;
+  --red: #DC2626; --red-light: #FEE2E2;
+  --amber: #D97706; --amber-light: #FEF3C7;
+  /* Chart palette: greens + grays for contrast */
+  --c1: #064E3B; --c2: #059669; --c3: #34D399; --c4: #6EE7B7; --c5: #A7F3D0;
+  --c6: #374151; --c7: #6B7280; --c8: #9CA3AF; --c9: #D1D5DB; --c10: #E5E7EB;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: var(--n100); color: var(--n800); line-height: 1.5; font-size: 14px; }
+
+/* ===== LAYOUT ===== */
+.page { max-width: 1440px; margin: 0 auto; padding: 0 32px 48px; }
+.grid { display: grid; gap: 16px; }
+.g2 { grid-template-columns: 1fr 1fr; }
+.g3 { grid-template-columns: 1fr 1fr 1fr; }
+.g4 { grid-template-columns: 1fr 1fr 1fr 1fr; }
+.g5 { grid-template-columns: 1fr 1fr 1fr 1fr 1fr; }
+.g23 { grid-template-columns: 2fr 3fr; }
+.g32 { grid-template-columns: 3fr 2fr; }
+@media (max-width: 1024px) { .g2,.g3,.g4,.g5,.g23,.g32 { grid-template-columns: 1fr; } }
+
+/* ===== HEADER ===== */
+.header { background: var(--g900); padding: 32px 0; margin-bottom: 24px; }
+.header .page { display: flex; justify-content: space-between; align-items: flex-end; padding-bottom: 0; }
+.header h1 { font-size: 22px; font-weight: 700; color: var(--white); letter-spacing: -0.3px; }
+.header .subtitle { font-size: 13px; color: var(--g300); margin-top: 2px; }
+.header .meta { text-align: right; }
+.header .meta div { font-size: 12px; color: var(--g300); }
+
+/* ===== SECTION HEADERS ===== */
+.section { margin-bottom: 24px; }
+.section-head { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; padding-bottom: 8px; border-bottom: 2px solid var(--g600); }
+.section-num { background: var(--g900); color: var(--white); font-size: 11px; font-weight: 700; width: 24px; height: 24px; border-radius: 4px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.section-title { font-size: 15px; font-weight: 700; color: var(--n900); text-transform: uppercase; letter-spacing: 0.5px; }
+
+/* ===== CARDS ===== */
+.card { background: var(--white); border: 1px solid var(--n200); border-radius: 8px; padding: 20px; }
+.card-title { font-size: 12px; font-weight: 600; color: var(--n500); text-transform: uppercase; letter-spacing: 0.4px; margin-bottom: 12px; }
+.chart-box { position: relative; height: 280px; }
+.chart-box.sm { height: 220px; }
+.chart-box.lg { height: 360px; }
+
+/* ===== KPI CARDS ===== */
+.kpi { background: var(--white); border: 1px solid var(--n200); border-radius: 8px; padding: 20px; border-top: 3px solid var(--g600); }
+.kpi .label { font-size: 11px; font-weight: 600; color: var(--n500); text-transform: uppercase; letter-spacing: 0.5px; }
+.kpi .val { font-size: 26px; font-weight: 800; color: var(--g900); margin: 4px 0 2px; letter-spacing: -0.5px; }
+.kpi .desc { font-size: 11px; color: var(--n400); }
+
+/* ===== TABLES ===== */
+table { width: 100%; border-collapse: collapse; }
+th { font-size: 10px; font-weight: 700; color: var(--n500); text-transform: uppercase; letter-spacing: 0.5px; padding: 8px 10px; border-bottom: 2px solid var(--n200); text-align: left; }
+td { font-size: 13px; padding: 7px 10px; border-bottom: 1px solid var(--n100); color: var(--n700); }
+.r { text-align: right; font-variant-numeric: tabular-nums; }
+.mono { font-family: 'SF Mono', 'Fira Code', monospace; font-size: 12px; }
+tr:hover td { background: var(--n50); }
+.tag { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 10px; font-weight: 600; }
+.tag-up { background: var(--g100); color: var(--g800); }
+.tag-down { background: var(--red-light); color: var(--red); }
+
+/* ===== INSIGHT BAR ===== */
+.insight { background: var(--g50); border-left: 3px solid var(--g600); padding: 12px 16px; border-radius: 0 6px 6px 0; font-size: 13px; color: var(--n700); margin-top: 12px; }
+.insight b { color: var(--g900); }
+
+/* ===== FOOTER ===== */
+.footer { text-align: center; padding: 24px 0; font-size: 12px; color: var(--n400); border-top: 1px solid var(--n200); margin-top: 32px; }
+.footer a { color: var(--g700); text-decoration: none; }
+
+/* ===== RECS ===== */
+.rec { padding: 16px; background: var(--n50); border-radius: 6px; border: 1px solid var(--n200); }
+.rec h4 { font-size: 13px; font-weight: 700; color: var(--g900); margin-bottom: 6px; display: flex; align-items: center; gap: 6px; }
+.rec h4 .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--g600); flex-shrink: 0; }
+.rec p { font-size: 13px; color: var(--n600); }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <div class="page" style="padding-bottom:0">
+    <div>
+      <h1>Cross-Chain Bridge Volume Analysis</h1>
+      <div class="subtitle">Market Intelligence Report &mdash; H1 2025 (Jan&ndash;Jun)</div>
+    </div>
+    <div class="meta">
+      <div>Dr.Phuc Le &middot; Research Lead</div>
+      <div>92 Chains &middot; 76 Protocols &middot; 181 Days</div>
+    </div>
+  </div>
+</div>
+
+<div class="page">
+
+<!-- KPIs -->
+<div class="grid g5" style="margin-bottom:24px">
+  <div class="kpi">
+    <div class="label">Total Volume</div>
+    <div class="val">$128.3B</div>
+    <div class="desc">H1 2025 across all protocols</div>
+  </div>
+  <div class="kpi">
+    <div class="label">Messaging Share</div>
+    <div class="val">43.5%</div>
+    <div class="desc">$55.8B via messaging protocols</div>
+  </div>
+  <div class="kpi">
+    <div class="label">Avg HHI</div>
+    <div class="val">2,993</div>
+    <div class="desc">Highly concentrated (&gt;2,500)</div>
+  </div>
+  <div class="kpi">
+    <div class="label">Fee TAM (3 bps)</div>
+    <div class="val">$77.0M</div>
+    <div class="desc">Annualized addressable revenue</div>
+  </div>
+  <div class="kpi">
+    <div class="label">Top Grower</div>
+    <div class="val" style="font-size:22px">Arbitrum</div>
+    <div class="desc">+36.9% Q2 vs Q1</div>
+  </div>
+</div>
+
+<!-- SECTION 1: CHAIN VOLUME -->
+<div class="section">
+  <div class="section-head"><div class="section-num">1</div><div class="section-title">Chain-Level Volume Analysis</div></div>
+  <div class="grid g32">
+    <div class="card">
+      <div class="card-title">Top 10 Chains by Bridge Volume</div>
+      <div class="chart-box"><canvas id="c_chainBar"></canvas></div>
+    </div>
+    <div class="card">
+      <div class="card-title">Volume Share Distribution</div>
+      <div class="chart-box"><canvas id="c_chainPie"></canvas></div>
+    </div>
+  </div>
+</div>
+
+<!-- SECTION 2: NET FLOWS + MONTHLY -->
+<div class="section">
+  <div class="section-head"><div class="section-num">2</div><div class="section-title">Capital Flows &amp; Monthly Trends</div></div>
+  <div class="grid g2">
+    <div class="card">
+      <div class="card-title">Net Capital Flows by Chain</div>
+      <div class="chart-box lg"><canvas id="c_netFlow"></canvas></div>
+    </div>
+    <div class="card">
+      <div class="card-title">Monthly Volume &mdash; Top 5 Chains</div>
+      <div class="chart-box lg"><canvas id="c_monthlyChain"></canvas></div>
+    </div>
+  </div>
+  <div class="insight"><b>Insight:</b> Ethereum sends $6.0B net outflow to L2s and alt-L1s. Avalanche is the top net receiver ($1.4B inflow). Arbitrum accelerated in May-Jun, surging from $0.6B to $2.1B monthly.</div>
+</div>
+
+<!-- SECTION 3: PROTOCOL ANALYSIS -->
+<div class="section">
+  <div class="section-head"><div class="section-num">3</div><div class="section-title">Protocol Analysis</div></div>
+  <div class="grid g32">
+    <div class="card">
+      <div class="card-title">Top 15 Protocols by Volume</div>
+      <div class="chart-box lg"><canvas id="c_protoBar"></canvas></div>
+    </div>
+    <div class="card">
+      <div class="card-title">Messaging vs Bridge Split</div>
+      <div class="chart-box" style="height:200px"><canvas id="c_split"></canvas></div>
+      <div style="height:12px"></div>
+      <div class="card-title">Messaging Protocol Trends</div>
+      <div class="chart-box" style="height:180px"><canvas id="c_msgTrend"></canvas></div>
+    </div>
+  </div>
+  <div class="insight"><b>Insight:</b> Messaging protocols handle 43.5% of all volume. LayerZero leads at $26.4B but growth flattened in June. Hyperlane is the fastest-growing messaging protocol (from $0 in Feb to $864M in Jun).</div>
+</div>
+
+<!-- SECTION 4: CONCENTRATION + GROWTH -->
+<div class="section">
+  <div class="section-head"><div class="section-num">4</div><div class="section-title">Market Concentration &amp; Growth</div></div>
+  <div class="grid g3">
+    <div class="card">
+      <div class="card-title">HHI Index Over Time</div>
+      <div class="chart-box sm"><canvas id="c_hhi"></canvas></div>
+    </div>
+    <div class="card">
+      <div class="card-title">Top 3 Market Share</div>
+      <div class="chart-box sm"><canvas id="c_top3"></canvas></div>
+    </div>
+    <div class="card">
+      <div class="card-title">Chain Growth Q2 vs Q1</div>
+      <div class="chart-box sm"><canvas id="c_growth"></canvas></div>
+    </div>
+  </div>
+  <div class="insight"><b>Insight:</b> HHI stays above 2,500 every month (highly concentrated). Top 3 chains hold 76-83% share. Sui (-63.7%) and Blast (-62.0%) are declining fastest; Arbitrum (+36.9%) and Sei (+34.1%) are growing.</div>
+</div>
+
+<!-- SECTION 5: FEE MODELING -->
+<div class="section">
+  <div class="section-head"><div class="section-num">5</div><div class="section-title">Fee Revenue Modeling</div></div>
+  <div class="grid g23">
+    <div class="card">
+      <div class="card-title">Fee Scenarios (Annualized)</div>
+      <table>
+        <thead><tr><th>Rate</th><th class="r">Bridge</th><th class="r">Messaging</th><th class="r">Total</th></tr></thead>
+        <tbody id="feeTable"></tbody>
+      </table>
+    </div>
+    <div class="card">
+      <div class="card-title">Monthly Fee Revenue at 3 bps</div>
+      <div class="chart-box"><canvas id="c_feeMo"></canvas></div>
+    </div>
+  </div>
+</div>
+
+<!-- SECTION 6: DAILY VOLUME -->
+<div class="section">
+  <div class="section-head"><div class="section-num">6</div><div class="section-title">Daily Volume &amp; Volatility</div></div>
+  <div class="card">
+    <div class="card-title">Daily Total Bridge Volume with 7-Day Moving Average</div>
+    <div class="chart-box lg"><canvas id="c_daily"></canvas></div>
+  </div>
+</div>
+
+<!-- SECTION 7: RECOMMENDATIONS -->
+<div class="section">
+  <div class="section-head"><div class="section-num">7</div><div class="section-title">Strategic Recommendations</div></div>
+  <div class="grid g3">
+    <div class="rec"><h4><span class="dot"></span>Market Positioning</h4><p>Optimize for Ethereum, Arbitrum, and 2-3 rotating top chains. These capture 77-83% of all addressable volume. A long-tail chain strategy is not efficient.</p></div>
+    <div class="rec"><h4><span class="dot"></span>Messaging Opportunity</h4><p>43.5% of volume now flows through messaging layers. Interoperability infrastructure, not just token bridges, is the growth vector for 2025-2026.</p></div>
+    <div class="rec"><h4><span class="dot"></span>Revenue Sizing</h4><p>At 3 bps the TAM is $77M annualized. Messaging alone is $33M. At 5 bps the total rises to $128M. Actual capture depends on competitive share.</p></div>
+    <div class="rec"><h4><span class="dot" style="background:var(--amber)"></span>Growth Targets</h4><p>Arbitrum (+36.9%) and Sei (+34.1%) are accelerating. Sui and Blast are declining sharply. Hyperlane is the breakout messaging protocol.</p></div>
+    <div class="rec"><h4><span class="dot" style="background:var(--red)"></span>Risk Factors</h4><p>Heavy concentration on Ethereum/Arbitrum. Daily volume CV &gt; 0.5 implies high volatility. 76+ competing protocols mean fee compression pressure.</p></div>
+    <div class="rec"><h4><span class="dot"></span>Data &amp; Methodology</h4><p>Sourced from DefiLlama, Dune Analytics, CoinGecko. 997 daily records, 92 chains, 76 protocols. Full notebook and datasets available in this repository.</p></div>
+  </div>
+</div>
+
+</div><!-- /page -->
+
+<div class="footer">
+  Cross-Chain Bridge Volume Analysis &middot; Dr. Phuc Le &middot; Data: DefiLlama, Dune Analytics, CoinGecko<br>
+  <a href="https://github.com/phuclhgm">github.com/phuclhgm</a>
+</div>
+
+<script>
+/* ===== DATA ===== */
+const D = {
+  chains: {labels:["Ethereum","Arbitrum","Avalanche","Solana","BSC","Sei","Optimism","Polygon","Sui","Sonic"], vals:[15107115195,7832993822,2364844295,1890994556,1033436154,736322159,715456708,471894256,290888192,250080797]},
+  othersVol: 1604036039,
+  nOthers: 82,
+  netLabels: ["Ethereum","Arbitrum","Solana","BSC","Optimism","Polygon","Sui","Sei","Blast","Avalanche"],
+  netVals: [-5958481402,-2421018440,-354897743,-139927232,-105185865,108149631,129073568,151818007,210978392,1356494964],
+  months: ['Jan','Feb','Mar','Apr','May','Jun'],
+  mChains: {
+    "Ethereum":[3424448305,2794822079,2143386044,2046028063,2098310905,2600119800],
+    "Arbitrum":[1772049958,645151351,889162402,952135305,1429404881,2145089925],
+    "Avalanche":[622054999,369383857,346262109,175866843,442672384,408604104],
+    "Solana":[603703105,299810686,176031681,183821449,354635355,272992280],
+    "BSC":[162995521,205736113,211036429,142622366,142924662,168121064]
+  },
+  protos: {labels:["LayerZero","Circle CCTP","Hyperliquid","Stargate","Wormhole","Across","Meson","deBridge","IBC","Arb Bridge","Squid","Polygon PoS","USDT0","Optimism GW","Orbiter"],
+    vals:[26373276383,19291230878,16489911238,11373226168,8516757351,6436832371,5953309619,5379915151,5305425430,3747799084,2055258261,2054396120,1786729596,1690039346,1654500791],
+    isMsg:[1,1,0,0,1,0,0,0,0,0,0,0,0,0,0]},
+  msgT: 55777257262, brgT: 72527128167, grandT: 128304385428,
+  mMsg: {
+    "LayerZero":[0,3128758086,5114950407,5556944416,7310411525,5262211949],
+    "Circle CCTP":[4474708501,2904512275,2366810921,3101435019,3466759375,2977004787],
+    "Wormhole":[2815439947,1524580221,1053967700,1109437909,1109647826,903683748],
+    "Hyperlane":[0,0,104198553,220656524,407603955,863533618]
+  },
+  hhi: [{m:"Jan",h:2805,t:77.6},{m:"Feb",h:3485,t:77.0},{m:"Mar",h:2962,t:77.6},{m:"Apr",h:3189,t:78.7},{m:"May",h:2524,t:76.2},{m:"Jun",h:2990,t:82.5}],
+  growth: {labels:["Sui","Blast","Polygon","Linea","Solana","Avalanche","BSC","Ethereum","Scroll","Optimism","Sonic","Sei","Arbitrum"],
+    vals:[-63.7,-62.0,-40.9,-32.4,-24.8,-23.2,-21.8,-19.4,-13.8,-8.1,8.3,34.1,36.9]},
+  monthlyVol: [23690752464,19112254826,18408201651,20050561415,25377916856,21664698217],
+  daily: null,
+};
+
+/* Daily data */
+D.daily = {"2025-01-01":502523481,"2025-01-02":731753804,"2025-01-03":711351860,"2025-01-04":566255959,"2025-01-05":471635429,"2025-01-06":778726574,"2025-01-07":597471201,"2025-01-08":467579094,"2025-01-09":528015985,"2025-01-10":335705118,"2025-01-11":387915092,"2025-01-12":553719743,"2025-01-13":1114231301,"2025-01-14":667183078,"2025-01-15":601349995,"2025-01-16":577106677,"2025-01-17":784486292,"2025-01-18":1377165225,"2025-01-19":1972085704,"2025-01-20":1630645902,"2025-01-21":963251039,"2025-01-22":727009652,"2025-01-23":1046261582,"2025-01-24":1349834400,"2025-01-25":455777674,"2025-01-26":461771883,"2025-01-27":995600635,"2025-01-28":614162145,"2025-01-29":473724609,"2025-01-30":628333717,"2025-01-31":618117613,"2025-02-01":474660576,"2025-02-02":673788929,"2025-02-03":1313638807,"2025-02-04":688801503,"2025-02-05":1311788007,"2025-02-06":595681934,"2025-02-07":505913118,"2025-02-08":347904409,"2025-02-09":351879501,"2025-02-10":531009843,"2025-02-11":563486713,"2025-02-12":547642754,"2025-02-13":645473628,"2025-02-14":730940289,"2025-02-15":463636279,"2025-02-16":448689891,"2025-02-17":551491865,"2025-02-18":756863627,"2025-02-19":607181508,"2025-02-20":682394154,"2025-02-21":1196800430,"2025-02-22":766380666,"2025-02-23":499658289,"2025-02-24":851251348,"2025-02-25":1006692984,"2025-02-26":712620706,"2025-02-27":569025560,"2025-02-28":716957508,"2025-03-01":514119760,"2025-03-02":708165621,"2025-03-03":674827630,"2025-03-04":715105759,"2025-03-05":624978283,"2025-03-06":521032274,"2025-03-07":466159533,"2025-03-08":379879821,"2025-03-09":403237319,"2025-03-10":732290868,"2025-03-11":683849886,"2025-03-12":563951125,"2025-03-13":503039399,"2025-03-14":630984392,"2025-03-15":428170017,"2025-03-16":401875236,"2025-03-17":522780893,"2025-03-18":570181132,"2025-03-19":695729257,"2025-03-20":672367981,"2025-03-21":508342226,"2025-03-22":279496783,"2025-03-23":249505071,"2025-03-24":877244428,"2025-03-25":771908057,"2025-03-26":917582088,"2025-03-27":801171076,"2025-03-28":823648699,"2025-03-29":515992369,"2025-03-30":520989961,"2025-03-31":729594708,"2025-04-01":783023123,"2025-04-02":922529233,"2025-04-03":927761984,"2025-04-04":780860984,"2025-04-05":434504309,"2025-04-06":589717405,"2025-04-07":1198627624,"2025-04-08":658975120,"2025-04-09":773878810,"2025-04-10":695180509,"2025-04-11":621220786,"2025-04-12":541411631,"2025-04-13":413534669,"2025-04-14":624012160,"2025-04-15":718360408,"2025-04-16":1015022038,"2025-04-17":654333716,"2025-04-18":543277493,"2025-04-19":369180776,"2025-04-20":465362648,"2025-04-21":537155695,"2025-04-22":800321871,"2025-04-23":816626152,"2025-04-24":766237109,"2025-04-25":619860270,"2025-04-26":510748320,"2025-04-27":383044189,"2025-04-28":521314499,"2025-04-29":775264101,"2025-04-30":589213781,"2025-05-01":739349993,"2025-05-02":424711861,"2025-05-03":368891856,"2025-05-04":487758876,"2025-05-05":627757058,"2025-05-06":1051733041,"2025-05-07":848306962,"2025-05-08":1167647833,"2025-05-09":1758636046,"2025-05-10":967130280,"2025-05-11":636581606,"2025-05-12":1503363932,"2025-05-13":1199742405,"2025-05-14":942343800,"2025-05-15":746367634,"2025-05-16":634758753,"2025-05-17":438999923,"2025-05-18":498541729,"2025-05-19":597301633,"2025-05-20":902865265,"2025-05-21":908142238,"2025-05-22":1173597389,"2025-05-23":1254099431,"2025-05-24":535743767,"2025-05-25":496609129,"2025-05-26":593344246,"2025-05-27":816344147,"2025-05-28":588952720,"2025-05-29":945024923,"2025-05-30":862135526,"2025-05-31":661132853,"2025-06-01":534325799,"2025-06-02":782618243,"2025-06-03":866961444,"2025-06-04":806810901,"2025-06-05":983265970,"2025-06-06":1027908615,"2025-06-07":692236343,"2025-06-08":537929010,"2025-06-09":1009938176,"2025-06-10":1479590550,"2025-06-11":827655414,"2025-06-12":818134351,"2025-06-13":894143948,"2025-06-14":415996589,"2025-06-15":335997247,"2025-06-16":831316520,"2025-06-17":664587146,"2025-06-18":504196748,"2025-06-19":479838179,"2025-06-20":968519878,"2025-06-21":483611680,"2025-06-22":650039716,"2025-06-23":788909813,"2025-06-24":1003833063,"2025-06-25":624213509,"2025-06-26":704117606,"2025-06-27":578780546,"2025-06-28":299992951,"2025-06-29":446916287,"2025-06-30":622311972};
+
+/* ===== CHART DEFAULTS ===== */
+const fmt = v => { const a=Math.abs(v); if(a>=1e12) return '$'+(v/1e12).toFixed(1)+'T'; if(a>=1e9) return '$'+(v/1e9).toFixed(1)+'B'; if(a>=1e6) return '$'+(v/1e6).toFixed(1)+'M'; if(a>=1e3) return '$'+(v/1e3).toFixed(0)+'K'; return '$'+v.toFixed(0); };
+Chart.defaults.font.family = "Inter, -apple-system, sans-serif";
+Chart.defaults.font.size = 11;
+Chart.defaults.color = '#6B7280';
+Chart.defaults.plugins.legend.labels.usePointStyle = true;
+Chart.defaults.plugins.legend.labels.pointStyleWidth = 8;
+Chart.defaults.plugins.legend.labels.padding = 12;
+const gridStyle = { color: '#F3F4F6', drawBorder: false };
+const noGrid = { display: false };
+
+/* ===== 1. CHAIN BAR ===== */
+new Chart(document.getElementById('c_chainBar'), {
+  type:'bar',
+  data:{ labels:[...D.chains.labels, `Others (${D.nOthers})`],
+    datasets:[{data:[...D.chains.vals.map(v=>v/1e9), D.othersVol/1e9],
+      backgroundColor:[...D.chains.vals.map((_,i)=>i<3?'var(--g800)':i<6?'var(--g500)':'var(--g300)'), '#D1D5DB'],
+      borderWidth:0, borderRadius:3, maxBarThickness:40}]},
+  options:{ responsive:true, maintainAspectRatio:false,
+    plugins:{legend:{display:false}, tooltip:{callbacks:{label:c=>fmt(c.raw*1e9)}}},
+    scales:{ y:{ticks:{callback:v=>'$'+v.toFixed(0)+'B'},grid:gridStyle}, x:{ticks:{maxRotation:45,font:{size:10}},grid:noGrid} }
+  }
+});
+
+/* ===== 1b. CHAIN PIE ===== */
+new Chart(document.getElementById('c_chainPie'), {
+  type:'doughnut',
+  data:{ labels:[...D.chains.labels, `Others (${D.nOthers})`],
+    datasets:[{data:[...D.chains.vals, D.othersVol],
+      backgroundColor:['#064E3B','#065F46','#047857','#059669','#10B981','#34D399','#6EE7B7','#A7F3D0','#D1FAE5','#ECFDF5','#D1D5DB'],
+      borderWidth:2, borderColor:'#fff'}]},
+  options:{ responsive:true, maintainAspectRatio:false, cutout:'55%',
+    plugins:{ legend:{position:'right',labels:{font:{size:10},padding:8}},
+      tooltip:{callbacks:{label:c=>`${c.label}: ${fmt(c.raw)} (${(c.raw/(D.chains.vals.reduce((a,b)=>a+b,0)+D.othersVol)*100).toFixed(1)}%)`}} }
+  }
+});
+
+/* ===== 2. NET FLOWS ===== */
+new Chart(document.getElementById('c_netFlow'), {
+  type:'bar',
+  data:{ labels:D.netLabels,
+    datasets:[{data:D.netVals.map(v=>v/1e9),
+      backgroundColor:D.netVals.map(v=>v<0?'#9CA3AF':'#059669'),
+      borderWidth:0, borderRadius:3}]},
+  options:{ indexAxis:'y', responsive:true, maintainAspectRatio:false,
+    plugins:{legend:{display:false}, tooltip:{callbacks:{label:c=>fmt(c.raw*1e9)}}},
+    scales:{ x:{ticks:{callback:v=>'$'+v.toFixed(1)+'B'},grid:gridStyle}, y:{grid:noGrid} }
+  }
+});
+
+/* ===== 2b. MONTHLY CHAINS ===== */
+const chainColors = ['#064E3B','#059669','#34D399','#9CA3AF','#D1D5DB'];
+new Chart(document.getElementById('c_monthlyChain'), {
+  type:'line',
+  data:{ labels:D.months,
+    datasets:Object.entries(D.mChains).map(([n,v],i)=>({
+      label:n, data:v.map(x=>x/1e9), borderColor:chainColors[i], backgroundColor:chainColors[i]+'15',
+      borderWidth:2, pointRadius:3, pointBackgroundColor:chainColors[i], tension:0.3 }))},
+  options:{ responsive:true, maintainAspectRatio:false,
+    plugins:{tooltip:{callbacks:{label:c=>`${c.dataset.label}: ${fmt(c.raw*1e9)}`}}},
+    scales:{ y:{ticks:{callback:v=>'$'+v.toFixed(1)+'B'},grid:gridStyle}, x:{grid:noGrid} }
+  }
+});
+
+/* ===== 3. PROTOCOL BAR ===== */
+new Chart(document.getElementById('c_protoBar'), {
+  type:'bar',
+  data:{ labels:D.protos.labels,
+    datasets:[{data:D.protos.vals.map(v=>v/1e9),
+      backgroundColor:D.protos.isMsg.map(m=>m?'#064E3B':'#9CA3AF'),
+      borderWidth:0, borderRadius:3, maxBarThickness:36}]},
+  options:{ responsive:true, maintainAspectRatio:false,
+    plugins:{ legend:{display:true,labels:{generateLabels:()=>[
+        {text:'Messaging',fillStyle:'#064E3B',strokeStyle:'#064E3B',lineWidth:0,pointStyle:'rectRounded'},
+        {text:'Bridge',fillStyle:'#9CA3AF',strokeStyle:'#9CA3AF',lineWidth:0,pointStyle:'rectRounded'}]}},
+      tooltip:{callbacks:{label:c=>fmt(c.raw*1e9)}}},
+    scales:{ y:{ticks:{callback:v=>'$'+v.toFixed(0)+'B'},grid:gridStyle}, x:{ticks:{maxRotation:45,font:{size:9}},grid:noGrid} }
+  }
+});
+
+/* ===== 3b. SPLIT ===== */
+new Chart(document.getElementById('c_split'), {
+  type:'doughnut',
+  data:{ labels:['Messaging ($55.8B)','Bridge ($72.5B)'],
+    datasets:[{data:[D.msgT,D.brgT], backgroundColor:['#064E3B','#D1D5DB'], borderWidth:2, borderColor:'#fff'}]},
+  options:{ responsive:true, maintainAspectRatio:false, cutout:'60%',
+    plugins:{ legend:{position:'bottom',labels:{font:{size:11}}},
+      tooltip:{callbacks:{label:c=>fmt(c.raw)}} }
+  }
+});
+
+/* ===== 3c. MSG TREND ===== */
+const msgC = ['#064E3B','#059669','#34D399','#A7F3D0'];
+new Chart(document.getElementById('c_msgTrend'), {
+  type:'line',
+  data:{ labels:D.months,
+    datasets:Object.entries(D.mMsg).map(([n,v],i)=>({
+      label:n, data:v.map(x=>x/1e9), borderColor:msgC[i], borderWidth:2, pointRadius:3,
+      pointBackgroundColor:msgC[i], tension:0.3 }))},
+  options:{ responsive:true, maintainAspectRatio:false,
+    plugins:{tooltip:{callbacks:{label:c=>`${c.dataset.label}: ${fmt(c.raw*1e9)}`}}, legend:{labels:{font:{size:10}}}},
+    scales:{ y:{ticks:{callback:v=>'$'+v.toFixed(0)+'B'},grid:gridStyle}, x:{grid:noGrid} }
+  }
+});
+
+/* ===== 4. HHI ===== */
+new Chart(document.getElementById('c_hhi'), {
+  type:'line',
+  data:{ labels:D.hhi.map(h=>h.m),
+    datasets:[
+      {label:'HHI',data:D.hhi.map(h=>h.h),borderColor:'#064E3B',borderWidth:2.5,pointRadius:5,pointBackgroundColor:'#064E3B',tension:0.3,fill:false},
+      {label:'Threshold (2500)',data:Array(6).fill(2500),borderColor:'#DC2626',borderWidth:1,borderDash:[5,4],pointRadius:0,fill:false}
+    ]},
+  options:{ responsive:true, maintainAspectRatio:false,
+    plugins:{legend:{position:'bottom',labels:{font:{size:10}}}},
+    scales:{ y:{min:1500,max:4000,grid:gridStyle}, x:{grid:noGrid} }
+  }
+});
+
+/* ===== 4b. TOP3 ===== */
+new Chart(document.getElementById('c_top3'), {
+  type:'bar',
+  data:{ labels:D.hhi.map(h=>h.m),
+    datasets:[{data:D.hhi.map(h=>h.t),backgroundColor:'#059669',borderWidth:0,borderRadius:3,maxBarThickness:32}]},
+  options:{ responsive:true, maintainAspectRatio:false,
+    plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>c.raw.toFixed(1)+'%'}}},
+    scales:{ y:{min:60,max:100,ticks:{callback:v=>v+'%'},grid:gridStyle}, x:{grid:noGrid} }
+  }
+});
+
+/* ===== 4c. GROWTH ===== */
+new Chart(document.getElementById('c_growth'), {
+  type:'bar',
+  data:{ labels:D.growth.labels,
+    datasets:[{data:D.growth.vals,
+      backgroundColor:D.growth.vals.map(v=>v>=0?'#059669':'#9CA3AF'),
+      borderWidth:0, borderRadius:3}]},
+  options:{ indexAxis:'y', responsive:true, maintainAspectRatio:false,
+    plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>(c.raw>=0?'+':'')+c.raw.toFixed(1)+'%'}}},
+    scales:{ x:{ticks:{callback:v=>v+'%'},grid:gridStyle}, y:{ticks:{font:{size:10}},grid:noGrid} }
+  }
+});
+
+/* ===== 5. FEE TABLE ===== */
+const tbody = document.getElementById('feeTable');
+[1,2,3,5,10].forEach(bps => {
+  const r = bps/10000;
+  const brg = D.brgT*2*r, msg = D.msgT*2*r, tot = D.grandT*2*r;
+  const tr = document.createElement('tr');
+  if(bps===3) tr.style.background='#ECFDF5';
+  tr.innerHTML=`<td><strong>${bps} bps</strong></td><td class="r mono">${fmt(brg)}</td><td class="r mono">${fmt(msg)}</td><td class="r mono"><strong>${fmt(tot)}</strong></td>`;
+  tbody.appendChild(tr);
+});
+
+/* ===== 5b. FEE MONTHLY ===== */
+new Chart(document.getElementById('c_feeMo'), {
+  type:'bar',
+  data:{ labels:D.months,
+    datasets:[{data:D.monthlyVol.map(v=>v*3/10000/1e6),
+      backgroundColor:'#059669', borderWidth:0, borderRadius:3, maxBarThickness:40}]},
+  options:{ responsive:true, maintainAspectRatio:false,
+    plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>'$'+c.raw.toFixed(2)+'M'}}},
+    scales:{ y:{ticks:{callback:v=>'$'+v.toFixed(1)+'M'},grid:gridStyle}, x:{grid:noGrid} }
+  }
+});
+
+/* ===== 6. DAILY ===== */
+const dDates = Object.keys(D.daily);
+const dVals = Object.values(D.daily).map(v=>v/1e9);
+// 7-day MA
+const ma7 = dVals.map((_,i)=>{ if(i<6) return null; let s=0; for(let j=i-6;j<=i;j++) s+=dVals[j]; return s/7; });
+new Chart(document.getElementById('c_daily'), {
+  type:'line',
+  data:{ labels:dDates.map(d=>{const p=d.split('-');return p[1]+'/'+p[2];}),
+    datasets:[
+      {label:'Daily',data:dVals,borderColor:'#D1D5DB',backgroundColor:'#ECFDF520',borderWidth:1,pointRadius:0,fill:true,tension:0.1},
+      {label:'7-Day MA',data:ma7,borderColor:'#064E3B',borderWidth:2,pointRadius:0,tension:0.3,fill:false}
+    ]},
+  options:{ responsive:true, maintainAspectRatio:false,
+    plugins:{tooltip:{callbacks:{label:c=>c.dataset.label+': '+fmt(c.raw*1e9)}},legend:{position:'top'}},
+    scales:{ y:{ticks:{callback:v=>'$'+v.toFixed(1)+'B'},grid:gridStyle},
+      x:{ticks:{maxTicksLimit:12,maxRotation:0},grid:noGrid} }
+  }
+});
+</script>
+</body>
+</html>

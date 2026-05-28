@@ -1,0 +1,132 @@
+Name,Ticker,Year,Type
+SNAXchain,NONE,2024,Optimistic Rollup
+Ethernity,ERN,2024,Optimistic Rollup
+Phala,PHA,2024,ZK Rollup
+Kontos,KOS,2023,ZK Rollup
+Fuel v1,NONE,2022,Optimistic Rollup
+R0ar,NONE,2024,Optimistic Rollup
+AIRAS,NONE,2025,ZK Rollup
+OpenZK,NONE,2025,ZK Rollup
+Scroll,SCR,2023,ZK Rollup
+Zircuit,NONE,2024,ZK Rollup
+Taiko,TAIKO,2024,Optimistic Rollup
+Mode,MODE,2024,Optimistic Rollup
+Soneium,NONE,2025,Optimistic Rollup
+Lisk,LSK,2024,Optimistic Rollup
+Swell,SWELL,2024,Optimistic Rollup
+Ink,INK,2024,Optimistic Rollup
+Fuel Ignition,FUEL,2024,Optimistic Rollup
+Paradex,NONE,2023,ZK Rollup
+DeGate V1,DG,2023,ZK Rollup
+Abstract,ABS,2025,ZK Rollup
+Polygon zkEVM,POL,2023,ZK Rollup
+ZKsync Lite,ZK,2021,ZK Rollup
+Kinto,NONE,2024,Optimistic Rollup
+Loopring,LRC,2020,ZK Rollup
+Unichain,NONE,2024,Optimistic Rollup
+Morph,NONE,2024,Optimistic Rollup
+Zora,Zora,2023,Optimistic Rollup
+HashKey Chain,NONE,2024,Optimistic Rollup
+Boba,BOBA,2021,Optimistic Rollup
+ One,ABR,2021,Optimistic Rollup
+Base,NONE,2023,Optimistic Rollup
+Optimism,OP,2021,Optimistic Rollup
+ZKsync,ZK,2023,ZK Rollup
+Starknet,STRK,2023,ZK Rollup
+Blast,BLAST,2023,Optimistic Rollup
+Linea,NONE,2023,ZK Rollup
+World Chain,WLD,2024,Optimistic Rollup
+BOB,BOB,2024,Optimistic Rollup
+Polynomial,NONE,2024,Optimistic Rollup
+Kroma,KRO,2023,Optimistic Rollup
+ZERO Network,NONE,2024,ZK Rollup
+Mint,MINT,2024,Optimistic Rollup
+Zk.Money v1,NONE,2021,ZK Rollup
+Prom,PROM,2024,ZK Rollup
+Shape,NONE,2024,Optimistic Rollup
+Facet,NONE,2024,Optimistic Rollup
+Metal,MTL,2024,Optimistic Rollup
+DeBank Chain,NONE,2024,Optimistic Rollup
+ZKBase,ZKB,2022,ZK Rollup
+SuperLumio,NONE,2024,Optimistic Rollup
+Swan Chain,SWAN,2024,Optimistic Rollup
+Optopia,OPAI,2024,Optimistic Rollup
+Term Structure,TERM,2024,ZK Rollup
+Honeypot,NONE,2023,Optimistic Rollup
+Arena-Z,NONE,2024,Optimistic Rollup
+Superseed,NONE,2024,Optimistic Rollup
+Race Network,NONE,2024,Optimistic Rollup
+Frame Chain,NONE,2024,Optimistic Rollup
+Rufus,NONE,2024,Optimium
+rhino.fi,NONE,2024,Validium
+XR One,NONE,2025,Optimium
+GRVT,GRVT,2024,Validium
+Memb,NONE,2022,Optimium
+Corn,CORN,2024,Optimium
+Ancient8,A8,2024,Optimium
+Soon,NONE,2025,Optimium
+Fluence,FLT,2024,Optimium
+HYCHAIN,NONE,2024,Optimium
+Xai,XAI,2024,Optimium
+tanX,NONE,2024,Validium
+Redstone,NONE,2024,Optimium
+ZKFair,ZKF,2024,Validium
+Aleph Zero EVM,AZERO,2024,Optimium
+Funki,NONE,2024,Optimium
+Everclear Hub,NONE,2024,Optimium
+AlienX,AIX,2024,Validium
+B3,B3,2024,Optimium
+Astar zkEVM,ASTAR,2024,Validium
+Towns,NONE,2024,Optimium
+Myria,MYRIA,2024,Optimium
+Form,FORM,2024,Optimium
+OEV Network,NONE,2024,Optimium
+Ebi Chain,NONE,2024,Optimium
+XCHAIN,NONE,2024,Optimium
+CheeseChain,CHEESE,2024,Optimium
+Edgeless,NONE,2024,Optimium
+Xterio Chain,NONE,2024,Optimium
+GM Network,NONE,2024,Optimium
+Automata,ATA,2024,Optimium
+Aevo,AEVO,2023,Optimium
+Lumia Prism,NONE,2024,Validium
+NearDA,NEAR,2023,Optimium
+RSS3 VSL,NONE,2024,Validium
+ApeX,APEX,2022,Validium
+X Layer,NONE,2024,Validium
+Arbitrum Nova,ABR,2022,Optimium
+SX Network,SX,2024,Optimium
+Reya,NONE,2024,Optimium
+Cyber,CYBER,2024,Optimium
+Orderly,ORDER,2023,Optimium
+K2,NONE,2024,Optimium
+Silicon,NONE,2024,Validium
+Sorare,NONE,2021,Validium
+Treasure,MAGIC,2024,Validium
+Game7,NONE,2025,Optimium
+Pepe Unchained,PEPU,2024,Optimium
+WINR,WINR,2024,Optimium
+Polygon PoS,POL,2021,None
+Hyperliquid,HYPER,2024,None
+Eclipse,ECLIPSE,2024,None
+Immutable zkEVM,IMX,2024,None
+LightLink,NONE,2024,None
+Shibarium,SHIBA,2023,Optimium
+Bitlayer,NONE,2025,Optimium
+B2 Network,B2,2025,Optimium
+Celo,CELO,2021,Optimium
+DuckChain,None,2024,None
+Guru Network,GURU,2025,None
+Manta Pacific,MANTA,2023,None
+Mantle,MANTLE,2021,None
+Merlin,MERLIN,2024,Nome
+Metis,METIS,2020,None
+opBNB,BNB,2023,None
+re.al,RWA,2024,None
+Rivalz,RIVAL,2024,None
+Sophon,SOPHON,2025,None
+Unit Zero,NONE,2025,None
+Public Goods Network,PGN,2023,None
+Caldera,CAL,2023,None
+HomeVerse,HV,2024,None
+AltLayer,ALT,2025,None

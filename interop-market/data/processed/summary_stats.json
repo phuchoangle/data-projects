@@ -1,0 +1,16 @@
+{
+  "total_l1": 338,
+  "total_l2": 131,
+  "total_l3": 29,
+  "total_platforms": 498,
+  "total_covered": 185,
+  "coverage_rate": 37.1,
+  "unserviced": 313,
+  "providers": {
+    "LayerZero": 87,
+    "Wormhole": 35,
+    "Hyperlane": 125,
+    "Axelar": 19,
+    "Chainlink CCIP": 50
+  }
+}

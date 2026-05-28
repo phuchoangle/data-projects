@@ -1,0 +1,339 @@
+Name,Ticker,Year
+Bitcoin,BTC,2013
+Ethereum,ETH,2015
+BNB Chain,BNB,2017
+Solana,SOL,2020
+Cardano,ADA,2017
+TRON,TRX,2017
+Toncoin,TON,2021
+Avalanche,AVAX,2020
+Sui,SUI,2023
+Hedera,HBAR,2019
+Litecoin,LTC,2013
+Bitcoin Cash,BCH,2017
+MANTRA,OM,2020
+Pi Network,PI,2025
+Hyperliquid,HYPE,2024
+Monero,XML,2014
+Aptos,APT,2022
+NEAR Protocol,NEAR,2020
+Internet Computer,ICP,2021
+Ethereum Classic,ETC,2016
+Cronos,CRO,2019
+VeChain,VET,2018
+Bittensor,TAO,2023
+Celestia,TIA,2023
+Kaspa,KAS,2022
+Filecoin,FIL,2020
+Sonic,S,2025
+Algorand,ALGO,2019
+Fasttoken,FTN,2023
+Story,IP,2025
+XDC Network,XDC,2018
+Sei,SEI,2023
+Injective,INJ,2020
+Theta Network,THETA,2018
+Flare,FLR,2023
+Berachain,BERA,2025
+GALA,GALA,2020
+Tezos,XTZ,2018
+IOTA,IOTA,2017
+Entangle,NTGL,2024
+Flow,FLOW,2021
+Kaia,KAI,2024
+Zcash,ZEC,2016
+dYdX,DYDX,2023
+MultiversX,EGLD,2020
+Kava,KAVA,2019
+Arweave,AR,2019
+Ronin,RON,2022
+Chiliz,CHZ,2019
+eCash,XEC,2021
+Core,CORE,2023
+Plume,PLUME,2025
+Onyxcoin,XCN,2022
+Gnosis,GNO,2017
+AIOZ Network,AIOZ,2021
+Verus,VRSC,2018
+ZetaChain,ZETA,2024
+Astar,ASTR,2022
+VeThor,VTHO,2018
+Oasis,ROSE,2020
+Vana,VANA,2024
+WEMIX,WEMIX,2020
+Decred,DCR,2016
+DigiByte,DGB,2014
+Harmony One,ONE,2019
+aelf,ELF,2018
+Constellation,DAG,2018
+Chia,XCH,2019
+Enjin Coin,ENJ,2017
+Polymesh,POLYX,2022
+SKALE,SKL,2020
+Kadena,KDA,2020
+Casper Network,CSPR,2021
+ZIGChain,ZIG,2021
+Qubic,QUBIC,2023
+Gravity,G,2024
+Ozone Chain,OZO,2023
+peaq,PEAQ,2024
+Zano,ZANO,2019
+OKT Chain,OKT,2021
+Chromia,CHR,2019
+Ontology Gas,ONG,2018
+Aleo,ALEO,2024
+Wanchain,WAN,2018
+Self Chain,SLF,2024
+Collaterize,COLLAT,2025
+Vara Network,VARA,2023
+Klever,KLV,2020
+TriasLab,TRIAS,2021
+Maya Protocol,CAOCAO,2023
+OctaSpace,OCTA,2023
+Everscale,EVER,2020
+Jackal Protocol,JKL,2023
+FIO Protocol,FIO,2020
+Synternet,SYNT,2024
+XEN Crypto,XEN,2022
+Nimiq,NIM,2018
+The Root Network,ROOT,2023
+Nibiru,NIBI,2024
+Bellscoin,BELLS,2023
+Hathor,HTR,2020
+Nexa,NEXA,2023
+Tectum,TET,2023
+XX Network,XX,2022
+Partisia Blockchain,MPC,2024
+Minima,MINIMA,2024
+Nuklai,NAI,2024
+LeisureMeta,LM,2022
+Phantasma,SOUL,2018
+Router Protocol,ROUTE,2024
+Paw,PAW,2023
+Stratos,STOS,2021
+Archway,ARCH,2023
+Koinos,KOIN,2020
+Bifrost,BNC,2021
+GraphLinq Chain,GLQ,2021
+Sentinel,DVPN,2021
+Epic Cash,EPIC,2019
+Massa,MAS,2024
+Saito,SAITO,2021
+Canto,CANTO,2022
+Elys,ELYS,2024
+Xelis,XEL,2024
+Dynex,DNX,2022
+XDB CHAIN,XDB,2019
+LAOS Network,LAOS,2024
+Oxen,OXS,2018
+Lamina1,L1,2024
+Luckycoin,LKY,2013
+Pundi AI,PUNDI,2025
+OraiChain,ORAI,2020
+Acala,ACA,2022
+Quai Network,QUAI,2025
+Jumbo Blockchain,JNFTC,2024
+XION,XION,2024
+Telos,TLOS,2019
+Dusk,DUSK,2019
+Alephium,ALPH,2022
+Hydration,HDX,2023
+Saga,SAGA,2024
+Concordium,CCD,2022
+Syscoin,SYS,2014
+BXN,BXN,2024
+Kujira,KUJI,2021
+Elastos,ELA,2018
+Cortex,CTXC,2018
+Electroneum,ETN,2017
+Aleph Zero,AZERO,2022
+Taraxa,TARA,2021
+Firmachain,FCT,2019
+Viction,VIC,2018
+Wrapped QUIL,QUIL,2024
+Camino Network,CAM,2025
+REI Network,REI,2022
+LTO Network,LTO,2019
+Redbelly Network,RBNT,2024
+Dione,DIONE,2022
+Ice Open Network,ICE,2024
+Agoric,BLD,2022
+LUKSO,LYX,2023
+Pepecoin,PEP,2023
+Radix,XRD,2021
+WAX,WAXP,2018
+Particle Network,PARTI,2025
+Oasys,OAS,2022
+Humans.ai,HEART,2021
+Coreum,COREUM,2022
+Keeta,KTA,2025
+Vanar Chain,VANRY,2023
+Ergo,ERG,2019
+Cudos,CUDOS,2021
+Omni Network,OMNI,2024
+BounceBit,BB,2024
+Moonriver,MOVR,2021
+QANplatform,QANX,2021
+Supra,SUPRA ,2024
+VOI Network,VOI,2024
+Liberland LLD,LLD,2024
+Core Blockchain, XCB,2024
+Chihuahua Chain, HUAHUA,2022
+Evmos EVM,EVMOS,2022
+Wrapped QOM,WQOM,2024
+Witnet,WIT,2024
+eCredits (eSync Network),ECS,2024
+Arthera,ARTHERA,2024
+Waterfall,WATER,2024
+Neoxa,NEOX,2022
+Diamond,DMD,2013
+Hacash,HAC,2021
+Raptoreum,RTM,2021
+AirDAO,AMB,2017
+MultiVAC,MTV,2019
+Wownero,WOW,2018
+Matrix AI Network,MAN,2018
+Electra Protocol,XEP,2021
+TOP AI Network,TOP,2019
+Humanode,HMND,2023
+Neurai,XNA,2023
+Radiant,RXD,2022
+Cypherium,CPH,2021
+Aura Network,AURA,2022
+VinuChain,VC,2023
+Fuse,FUSE,2020
+Ternoa,CAPS,2021
+Energi,NRG,2018
+Spacemesh,$SMH,2023
+KIRA Network,KEX,2020
+Nexus,NXS,2015
+Sedra Coin,SDR,2024
+Meowcoin,MEWC,2022
+Unique Network,UNQ,2022
+Frencoin,FREN,2024
+Phicoin,PHI,2024
+Karlsen,KLS,2023
+Junkcoin,JKC,2024
+Graviton,GRAV,2022
+Starcoin,STC,2021
+THAT,THAT,2024
+Pactus,PAC,2024
+IXI,IXI,2019
+EquityPay,EQPAY,2023
+Spectre,SPR,2024
+MainnetZ,NETZ,2023
+Stohn Coin,SOH,2023
+White Whale,WHALE,2021
+COMDEX,CMDX,2021
+EVA Intelligence,EVA,2024
+Kylacoin,KCN,2023
+MELD,MELD,2023
+Metchain,MET,2024
+Pyrin,PYI,2023
+Scorum Coin,SCR,2018
+Zether,ZTH,2024
+Busy,BUSY,2021
+Decentr,DEC,2020
+Evadore,EVA,2023
+Hootchain,HOOT,2024
+Lyncoin,LCN,2023
+LiquidLayer,LILA,2023
+Desmos,DSM,2022
+OmniTensor,OMNIT,2024
+Vite DAO,VDAO,2024
+DREYERX NETWORK,DRX,2024
+Mirai Nodes,MIRAI,2024
+Orange,ORA,2024
+Shaicoin,SHA,2024
+Fennec,FNC,2024
+Layer One X,L1X,2025
+DENTNet,DENTX,2024
+Health and Wealth,HEWE,2024
+Graphite Network,@G,2025
+NeurochainAI,NCN,2024
+Hydra,HYDRA,2021
+Reddcoin,RDD,2014
+Kalichain,KALIS,2024
+BLOCX,BLOCX,2023
+Script Network,SCPT,2023
+PKT,PKT,2022
+Interlay,INTR,2022
+Canxium,CAU,2023
+Dor,DOR,2023
+5ire,5IRE,2023
+Chain4Energy,C4E,2024
+E Money Network,EMYC,2025
+3DPass,P3D,2023
+Kintsugi,KINT,2022
+BitSong,BTSG,2021
+Picasso,PICA ,2023
+EIOB,EIOB,2024
+Doric Network,DRC,2024
+SGE,SGE,2023
+Circular Protocol,CIRX,2024
+AtomOne,ATONE,2025
+GINI,$GINI,2025
+Symbol,XYM,2021
+Rubix,RBT,2022
+BBAChain,BBA,2025
+Quantum Fusion,QF,2024
+OverProtocol,OVER,2024
+Klever Finance,KFI,2021
+Aurum Crypto Gold,ACG,2023
+OPEN GPU,OGPU,2024
+Abey,ABEY,2021
+ZChains,ZCD,2024
+Lemon,LEMX,2024
+Smart Energy Pay,SEP,2024
+Xphere,XP,2025
+DaVinci Coin,DCOIN,2025
+Diamante,DIAM,2025
+Koii,KOII,2025
+MEVerse,MEV,2022
+SMART BLOCKCHAIN,SMART,2023
+PulseChain,PLS,2023
+Kingaru,KRU,2022
+Klaytn,KLAY,2019
+ULTRON,ULX,2022
+Cyberyen,CY,2023
+MUU,$MUU,2022
+Paladeum,PLB,2023
+Artela,NONE,2025
+Conflux eSpace,NONE,2023
+Conwal,NONE,2024
+Deep Brain Chain,NONE,2025
+DogeChain,DOGECHAIN,2023
+Endurance,NONE,2024
+Flame,FLAME,2024
+Fraxtal,FRAX,2022
+Glue,GLUE,2024
+Hemi Network,HEMI,2024
+Moonbeam,MOONBEAM,2021
+Nero,NERO,2023
+Oort,OORT,2024
+Reactive Mainnet,NONE,2024
+Rootstock,NONE,2024
+Subtensor,TAO,2022
+Irys,IRYS,2025
+Tangle,TANGLE,2024
+TRUMPChain,DJT,2025
+XPLA,XPLA,2025
+Fantom,FTM,2020
+Tenet,TENET,2024
+Meter,METER,2023
+Loot,LOOT,2023
+TomoChain,TOMO,2023
+Horizon EON,HORIZON,2023
+Beam,BEAM,2022
+Japan Open Chain,JOC,2024
+Masa,MASA,2024
+Clearpool,CLEAR,2024
+Movement,MOVE,2024
+initia,INITIA,2024
+Monad,MON,2024
+Terra,LUNA,2020
+Terra 2.0,TERRA,2022
+Aurora,AURORA,2022
+Cosmos,ATOM,2022
+Osmosis,OSMO,2023
+FogoChain,FOGO,2025

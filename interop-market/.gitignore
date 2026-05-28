@@ -1,0 +1,23 @@
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# LibreOffice / Excel temp files
+.~lock.*
+~$*.xlsx
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+.ipynb_checkpoints/
+.venv/
+venv/
+*.egg-info/
+
+# Jupyter
+.jupyter/
+
+# Node
+node_modules/
