@@ -176,6 +176,14 @@ tr:hover td { background: var(--n50); }
   border-top: 1px solid var(--n200); margin-top: 32px;
 }
 .footer a { color: var(--p700); text-decoration: none; }
+
+/* ===== HEADER ACTIONS ===== */
+.header-actions { margin-top: 16px; padding-top: 12px; border-top: 1px solid rgba(255,255,255,0.15); }
+.header-actions .page { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; padding-bottom: 0; }
+.btn-dl { display: inline-flex; align-items: center; gap: 6px; padding: 7px 16px; background: var(--p500); color: var(--white); border-radius: 6px; font-size: 13px; font-weight: 600; text-decoration: none; }
+.btn-dl:hover { background: var(--p400); color: var(--white); }
+.btn-gh { display: inline-flex; align-items: center; gap: 6px; padding: 7px 16px; background: transparent; color: var(--p300); border: 1px solid rgba(255,255,255,0.3); border-radius: 6px; font-size: 13px; font-weight: 500; text-decoration: none; }
+.btn-gh:hover { background: rgba(255,255,255,0.1); color: var(--white); }
 </style>
 </head>
 <body>
@@ -190,6 +198,12 @@ tr:hover td { background: var(--n50); }
     <div class="meta">
       <div>Phuc Hoang Le &middot; Research Lead at Concero</div>
       <div>498 Platforms &middot; 5 Providers &middot; 2013&ndash;2025</div>
+    </div>
+  </div>
+  <div class="header-actions">
+    <div class="page">
+      <a class="btn-dl" href="./interop_market_analysis.pptx" download>&#8595; Download Presentation</a>
+      <a class="btn-gh" href="https://github.com/phuchoangle/data-projects" target="_blank">&#x2B15; View Full Repo on GitHub</a>
     </div>
   </div>
 </div>

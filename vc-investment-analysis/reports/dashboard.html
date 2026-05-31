@@ -78,6 +78,13 @@ table tr:hover td { background: var(--bg); }
   .dashboard { max-width: 100%; }
   .panel { break-inside: avoid; }
 }
+
+/* ===== HEADER ACTIONS ===== */
+.header-actions { margin-top: 16px; padding-top: 12px; border-top: 1px solid rgba(255,255,255,0.2); display: flex; gap: 10px; flex-wrap: wrap; }
+.btn-dl { display: inline-flex; align-items: center; gap: 6px; padding: 7px 16px; background: rgba(255,255,255,0.2); color: #fff; border: 1px solid rgba(255,255,255,0.4); border-radius: 6px; font-size: 13px; font-weight: 600; text-decoration: none; }
+.btn-dl:hover { background: rgba(255,255,255,0.3); color: #fff; }
+.btn-gh { display: inline-flex; align-items: center; gap: 6px; padding: 7px 16px; background: transparent; color: rgba(255,255,255,0.8); border: 1px solid rgba(255,255,255,0.25); border-radius: 6px; font-size: 13px; font-weight: 500; text-decoration: none; }
+.btn-gh:hover { background: rgba(255,255,255,0.1); color: #fff; }
 </style>
 </head>
 <body>
@@ -91,6 +98,10 @@ table tr:hover td { background: var(--bg); }
     <span>Period: Nov 2024 - Apr 2025</span>
     <span>Data Source: Messari / CryptoRank</span>
     <span>Generated: May 2025</span>
+  </div>
+  <div class="header-actions">
+    <a class="btn-dl" href="./vc_investment_report.pptx" download>&#8595; Download Presentation</a>
+    <a class="btn-gh" href="https://github.com/phuchoangle/data-projects" target="_blank">&#x2B15; View Full Repo on GitHub</a>
   </div>
 </div>
 

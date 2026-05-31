@@ -84,6 +84,14 @@ tr:hover td { background: var(--n50); }
 .rec h4 { font-size: 13px; font-weight: 700; color: var(--g900); margin-bottom: 6px; display: flex; align-items: center; gap: 6px; }
 .rec h4 .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--g600); flex-shrink: 0; }
 .rec p { font-size: 13px; color: var(--n600); }
+
+/* ===== HEADER ACTIONS ===== */
+.header-actions { margin-top: 16px; padding-top: 12px; border-top: 1px solid rgba(255,255,255,0.15); }
+.header-actions .page { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; padding-bottom: 0; }
+.btn-dl { display: inline-flex; align-items: center; gap: 6px; padding: 7px 16px; background: var(--g500); color: var(--white); border-radius: 6px; font-size: 13px; font-weight: 600; text-decoration: none; }
+.btn-dl:hover { background: var(--g400); color: var(--white); }
+.btn-gh { display: inline-flex; align-items: center; gap: 6px; padding: 7px 16px; background: transparent; color: var(--g200); border: 1px solid rgba(255,255,255,0.3); border-radius: 6px; font-size: 13px; font-weight: 500; text-decoration: none; }
+.btn-gh:hover { background: rgba(255,255,255,0.1); color: var(--white); }
 </style>
 </head>
 <body>
@@ -98,6 +106,12 @@ tr:hover td { background: var(--n50); }
     <div class="meta">
       <div>Dr.Phuc Le &middot; Research Lead</div>
       <div>92 Chains &middot; 76 Protocols &middot; 181 Days</div>
+    </div>
+  </div>
+  <div class="header-actions">
+    <div class="page">
+      <a class="btn-dl" href="./bridge-volume-analysis-h1-2025.pptx" download>&#8595; Download Presentation</a>
+      <a class="btn-gh" href="https://github.com/phuchoangle/data-projects" target="_blank">&#x2B15; View Full Repo on GitHub</a>
     </div>
   </div>
 </div>
@@ -247,7 +261,7 @@ tr:hover td { background: var(--n50); }
 
 <div class="footer">
   Cross-Chain Bridge Volume Analysis &middot; Dr. Phuc Le &middot; Data: DefiLlama, Dune Analytics, CoinGecko<br>
-  <a href="https://github.com/phuclhgm">github.com/phuclhgm</a>
+  <a href="https://github.com/phuchoangle/data-projects">github.com/phuchoangle/data-projects</a>
 </div>
 
 <script>

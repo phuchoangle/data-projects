@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dr. Phuc Le - Data &amp; Business Analyst | Portfolio</title>
+<meta name="description" content="Portfolio of Dr. Phuc Le, data and business analyst. Research projects in quantitative market analysis, investment intelligence, and competitive landscape mapping.">
+<script>
+  if (localStorage.getItem('theme') === 'dark') {
+    document.documentElement.setAttribute('data-theme', 'dark');
+  }
+</script>
+<style>
+/* ===== LIGHT MODE (DEFAULT) ===== */
+:root {
+  --bg-0: #FFFFFF;
+  --bg-1: #F8FAFC;
+  --bg-2: #F1F5F9;
+  --bg-3: #E2E8F0;
+
+  --border: rgba(0,0,0,0.09);
+  --border-hi: rgba(0,0,0,0.16);
+
+  --text-hi: #0F172A;
+  --text: #1E293B;
+  --text-mut: #4B5E73;
+  --text-dim: #8FA3B8;
+
+  --green: #059669;
+  --green-soft: #10B981;
+  --blue: #2563EB;
+  --blue-soft: #3B82F6;
+  --navy: #1D4ED8;
+
+  --accent: #059669;
+  --accent-soft: #10B981;
+
+  --muted-bg: rgba(0,0,0,0.04);
+  --muted-bg-sm: rgba(0,0,0,0.05);
+  --muted-bg-hover: rgba(0,0,0,0.07);
+
+  --nav-bg: rgba(255,255,255,0.88);
+  --dot-glow: rgba(5,150,105,0.35);
+
+  --radius: 12px;
+  --radius-sm: 8px;
+}
+
+/* ===== DARK MODE ===== */
+[data-theme="dark"] {
+  --bg-0: #0A0F1C;
+  --bg-1: #0F1626;
+  --bg-2: #151E33;
+  --bg-3: #1B2742;
+
+  --border: rgba(255,255,255,0.08);
+  --border-hi: rgba(255,255,255,0.16);
+
+  --text-hi: #F4F7FB;
+  --text: #C9D3E1;
+  --text-mut: #8896AA;
+  --text-dim: #5A6678;
+
+  --green: #10B981;
+  --green-soft: #34D399;
+  --blue: #4A9BD9;
+  --blue-soft: #7CB9E8;
+  --navy: #2E6B9E;
+
+  --accent: #10B981;
+  --accent-soft: #6EE7B7;
+
+  --muted-bg: rgba(255,255,255,0.04);
+  --muted-bg-sm: rgba(255,255,255,0.06);
+  --muted-bg-hover: rgba(255,255,255,0.07);
+
+  --nav-bg: rgba(10,15,28,0.75);
+  --dot-glow: rgba(16,185,129,0.6);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+  background: var(--bg-0);
+  background-image:
+    radial-gradient(ellipse 80% 50% at 50% -10%, rgba(5,150,105,0.07), transparent 60%),
+    radial-gradient(ellipse 60% 40% at 100% 100%, rgba(37,99,235,0.05), transparent 60%);
+  background-attachment: fixed;
+  color: var(--text);
+  line-height: 1.6;
+  font-size: 15px;
+  -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
+}
+[data-theme="dark"] body {
+  background-image:
+    radial-gradient(ellipse 80% 50% at 50% -10%, rgba(16,185,129,0.10), transparent 60%),
+    radial-gradient(ellipse 60% 40% at 100% 100%, rgba(74,155,217,0.08), transparent 60%);
+}
+
+a { color: var(--accent-soft); text-decoration: none; }
+a:hover { color: var(--green-soft); }
+
+/* ===== LAYOUT ===== */
+.container { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
+
+/* ===== NAVBAR ===== */
+.nav {
+  position: sticky; top: 0; z-index: 50;
+  background: var(--nav-bg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+}
+.nav-inner {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 14px 24px; max-width: 1100px; margin: 0 auto;
+}
+.brand {
+  font-weight: 700; font-size: 15px; color: var(--text-hi);
+  display: flex; align-items: center; gap: 10px;
+}
+.brand-dot {
+  width: 10px; height: 10px; border-radius: 50%;
+  background: var(--green); box-shadow: 0 0 12px var(--dot-glow);
+}
+.nav-right { display: flex; align-items: center; gap: 18px; }
+.nav-links { display: flex; gap: 22px; font-size: 13px; }
+.nav-links a { color: var(--text-mut); }
+.nav-links a:hover { color: var(--text-hi); }
+
+.theme-btn {
+  display: inline-flex; align-items: center;
+  padding: 5px 13px;
+  border: 1px solid var(--border-hi);
+  border-radius: 999px;
+  background: var(--muted-bg);
+  color: var(--text-mut);
+  font-size: 12px; font-weight: 600; letter-spacing: 0.3px;
+  cursor: pointer; font-family: inherit; line-height: 1.5;
+  transition: background 140ms ease, color 140ms ease;
+}
+.theme-btn:hover { background: var(--muted-bg-hover); color: var(--text-hi); }
+
+/* ===== HERO ===== */
+.hero { padding: 80px 0 56px; }
+.eyebrow {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-size: 12px; font-weight: 600; letter-spacing: 0.8px;
+  text-transform: uppercase; color: var(--green-soft);
+  padding: 6px 12px; border: 1px solid rgba(16,185,129,0.25);
+  background: rgba(16,185,129,0.06); border-radius: 999px;
+  margin-bottom: 20px;
+}
+.eyebrow::before {
+  content: ''; width: 6px; height: 6px; border-radius: 50%;
+  background: var(--green); box-shadow: 0 0 8px var(--green);
+}
+.hero h1 {
+  font-size: clamp(36px, 5.5vw, 56px);
+  line-height: 1.05; letter-spacing: -1.5px;
+  color: var(--text-hi); font-weight: 800;
+  margin-bottom: 16px;
+}
+.hero h1 .accent {
+  background: linear-gradient(135deg, var(--green-soft) 0%, var(--blue-soft) 100%);
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.hero .role {
+  font-size: 18px; color: var(--text); font-weight: 500;
+  margin-bottom: 18px;
+}
+.hero .bio {
+  max-width: 640px; font-size: 16px; color: var(--text-mut);
+  line-height: 1.65;
+}
+
+.hero-meta {
+  display: flex; gap: 28px; flex-wrap: wrap;
+  margin-top: 32px; padding-top: 24px;
+  border-top: 1px solid var(--border);
+}
+.hero-meta .item { display: flex; flex-direction: column; gap: 2px; }
+.hero-meta .num {
+  font-size: 22px; font-weight: 700; color: var(--text-hi);
+  letter-spacing: -0.5px; font-variant-numeric: tabular-nums;
+}
+.hero-meta .lbl {
+  font-size: 11px; font-weight: 600; color: var(--text-dim);
+  text-transform: uppercase; letter-spacing: 0.8px;
+}
+
+/* ===== SECTION ===== */
+.section { padding: 56px 0; }
+.section-head {
+  display: flex; align-items: baseline; justify-content: space-between;
+  margin-bottom: 28px; gap: 16px; flex-wrap: wrap;
+}
+.section-head h2 {
+  font-size: 24px; font-weight: 700; color: var(--text-hi);
+  letter-spacing: -0.5px;
+}
+.section-head .hint { font-size: 13px; color: var(--text-dim); }
+
+/* ===== PROJECT CARDS ===== */
+.projects { display: grid; gap: 20px; }
+
+.card {
+  background: linear-gradient(180deg, var(--bg-2) 0%, var(--bg-1) 100%);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 28px;
+  position: relative; overflow: hidden;
+  transition: border-color 160ms ease, transform 160ms ease;
+}
+.card::before {
+  content: ''; position: absolute; left: 0; top: 0; bottom: 0;
+  width: 3px; background: var(--accent);
+  transform: scaleY(0); transform-origin: top;
+  transition: transform 200ms ease;
+}
+.card:hover { border-color: var(--border-hi); transform: translateY(-2px); }
+.card:hover::before { transform: scaleY(1); }
+
+.card.theme-green { --accent: var(--green); --accent-soft: var(--green-soft); }
+.card.theme-navy  { --accent: var(--blue); --accent-soft: var(--blue-soft); }
+.card.theme-blue  { --accent: var(--navy); --accent-soft: var(--blue-soft); }
+
+.card-grid { display: grid; gap: 20px; }
+@media (min-width: 720px) {
+  .card-grid { grid-template-columns: 1fr 260px; align-items: start; }
+}
+
+.card-meta {
+  display: flex; align-items: center; gap: 10px;
+  font-size: 11px; font-weight: 600; color: var(--accent-soft);
+  text-transform: uppercase; letter-spacing: 0.8px;
+  margin-bottom: 12px;
+}
+.card-meta .num {
+  width: 22px; height: 22px; border-radius: 5px;
+  background: var(--muted-bg-sm); border: 1px solid var(--border);
+  display: inline-flex; align-items: center; justify-content: center;
+  color: var(--text-hi); font-size: 11px;
+}
+.card h3 {
+  font-size: 22px; font-weight: 700; color: var(--text-hi);
+  letter-spacing: -0.4px; margin-bottom: 10px; line-height: 1.25;
+}
+.card p {
+  font-size: 14px; color: var(--text-mut); line-height: 1.65;
+  margin-bottom: 16px;
+}
+.stats {
+  display: flex; flex-wrap: wrap; gap: 6px 14px;
+  font-size: 12px; color: var(--text); font-weight: 500;
+  margin-bottom: 14px; font-variant-numeric: tabular-nums;
+}
+.stats .sep { color: var(--text-dim); }
+.tags { display: flex; flex-wrap: wrap; gap: 6px; }
+.tag {
+  font-size: 11px; font-weight: 600;
+  padding: 4px 10px; border-radius: 999px;
+  background: var(--muted-bg);
+  border: 1px solid var(--border);
+  color: var(--text-mut);
+}
+
+.card-actions { display: flex; flex-direction: column; gap: 8px; }
+.btn {
+  display: inline-flex; align-items: center; justify-content: space-between;
+  gap: 8px; padding: 11px 16px;
+  font-size: 13px; font-weight: 600;
+  border-radius: var(--radius-sm); text-decoration: none;
+  transition: background 140ms ease, border-color 140ms ease, color 140ms ease;
+}
+.btn-primary {
+  background: var(--accent); color: #06121C;
+  border: 1px solid var(--accent);
+}
+.btn-primary:hover { background: var(--accent-soft); border-color: var(--accent-soft); color: #06121C; }
+.btn-ghost {
+  background: transparent; color: var(--text);
+  border: 1px solid var(--border-hi);
+}
+.btn-ghost:hover { background: var(--muted-bg); color: var(--text-hi); }
+.btn .arrow { font-size: 14px; }
+
+/* ===== CONTACT ===== */
+.contact {
+  background: linear-gradient(180deg, var(--bg-1) 0%, var(--bg-0) 100%);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 36px; text-align: center;
+}
+.contact h2 {
+  font-size: 24px; font-weight: 700; color: var(--text-hi);
+  letter-spacing: -0.4px; margin-bottom: 8px;
+}
+.contact p { color: var(--text-mut); font-size: 14px; margin-bottom: 22px; }
+.contact-links { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+
+/* ===== FOOTER ===== */
+.footer {
+  padding: 36px 0 48px; text-align: center;
+  font-size: 12px; color: var(--text-dim);
+  border-top: 1px solid var(--border); margin-top: 48px;
+}
+.footer a { color: var(--text-mut); }
+.footer a:hover { color: var(--text-hi); }
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 640px) {
+  .nav-links { display: none; }
+  .hero { padding: 56px 0 36px; }
+  .hero-meta { gap: 18px; }
+  .hero-meta .num { font-size: 18px; }
+  .card { padding: 22px; }
+  .section { padding: 40px 0; }
+  .contact { padding: 28px 20px; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="#top" class="brand">
+      <span class="brand-dot"></span>
+      Dr. Phuc Le
+    </a>
+    <div class="nav-right">
+      <div class="nav-links">
+        <a href="#projects">Projects</a>
+        <a href="#contact">Contact</a>
+        <a href="https://github.com/phuchoangle/data-projects" target="_blank" rel="noopener">GitHub</a>
+      </div>
+      <button class="theme-btn" id="themeBtn" aria-label="Switch to dark mode">Dark</button>
+    </div>
+  </div>
+</nav>
+
+<main id="top">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="container">
+      <span class="eyebrow">Open to new opportunities</span>
+      <h1>Turning raw data into<br><span class="accent">clear findings</span>.</h1>
+      <div class="role">Dr. Phuc Le &middot; Data &amp; Business Analyst</div>
+      <p class="bio">
+        All three projects below were completed at Concero, a blockchain protocol, where I
+        was Research Lead. Each one goes from raw data to finished deliverable: data sourcing,
+        cleaning, modelling, interactive dashboard, and executive presentation. The subject
+        matter is crypto and blockchain. The analytical workflow is the same in any
+        data-intensive domain.
+      </p>
+
+      <div class="hero-meta">
+        <div class="item">
+          <div class="num">3</div>
+          <div class="lbl">Research Reports</div>
+        </div>
+        <div class="item">
+          <div class="num">$135B+</div>
+          <div class="lbl">Volume Analysed</div>
+        </div>
+        <div class="item">
+          <div class="num">1,600+</div>
+          <div class="lbl">Entities Mapped</div>
+        </div>
+        <div class="item">
+          <div class="num">2025</div>
+          <div class="lbl">Latest Update</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section class="section" id="projects">
+    <div class="container">
+      <div class="section-head">
+        <h2>Featured Research</h2>
+        <span class="hint">Click any card to open the interactive dashboard.</span>
+      </div>
+
+      <div class="projects">
+
+        <!-- Project 1 -->
+        <article class="card theme-green">
+          <div class="card-grid">
+            <div>
+              <div class="card-meta"><span class="num">01</span> Bridges &middot; Market Intelligence</div>
+              <h3>Cross-Chain Bridge Volume Analysis</h3>
+              <p>
+                Analysis of cross-chain bridge activity covering market concentration, the
+                messaging vs bridge protocol split, fee revenue modelling, and chain growth
+                rates across H1 2025.
+              </p>
+              <div class="stats">
+                <span>$128.3B volume</span><span class="sep">&middot;</span>
+                <span>92 chains</span><span class="sep">&middot;</span>
+                <span>76 protocols</span><span class="sep">&middot;</span>
+                <span>H1 2025</span>
+              </div>
+              <div class="tags">
+                <span class="tag">Python</span>
+                <span class="tag">pandas</span>
+                <span class="tag">Chart.js</span>
+                <span class="tag">DefiLlama</span>
+                <span class="tag">Dune</span>
+              </div>
+            </div>
+            <div class="card-actions">
+              <a class="btn btn-primary" href="./chain-bridge-volume/reports/dashboard.html">
+                View Dashboard <span class="arrow">&rarr;</span>
+              </a>
+              <a class="btn btn-ghost" href="./chain-bridge-volume/reports/bridge-volume-analysis-h1-2025.pptx" download>
+                Download .pptx <span class="arrow">&#8595;</span>
+              </a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Project 2 -->
+        <article class="card theme-navy">
+          <div class="card-grid">
+            <div>
+              <div class="card-meta"><span class="num">02</span> Interoperability &middot; Coverage Gap</div>
+              <h3>Blockchain Interoperability Market</h3>
+              <p>
+                Coverage gap analysis between 498 blockchain platforms and 5 major
+                interoperability providers, with 2027 growth projections and strategic
+                opportunity sizing.
+              </p>
+              <div class="stats">
+                <span>498 platforms</span><span class="sep">&middot;</span>
+                <span>5 providers</span><span class="sep">&middot;</span>
+                <span>62.9% unserviced</span><span class="sep">&middot;</span>
+                <span>1,000+ projected by 2027</span>
+              </div>
+              <div class="tags">
+                <span class="tag">Python</span>
+                <span class="tag">pandas</span>
+                <span class="tag">Chart.js</span>
+                <span class="tag">Market Research</span>
+              </div>
+            </div>
+            <div class="card-actions">
+              <a class="btn btn-primary" href="./interop-market/reports/interop_market_report.html">
+                View Dashboard <span class="arrow">&rarr;</span>
+              </a>
+              <a class="btn btn-ghost" href="./interop-market/reports/interop_market_analysis.pptx" download>
+                Download .pptx <span class="arrow">&#8595;</span>
+              </a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Project 3 -->
+        <article class="card theme-blue">
+          <div class="card-grid">
+            <div>
+              <div class="card-meta"><span class="num">03</span> VC &middot; Network Analysis</div>
+              <h3>Crypto VC Investment Intelligence</h3>
+              <p>
+                Co-investment network mapping and category trend analysis across 338 funding
+                rounds, designed to guide investor targeting and fundraising strategy.
+              </p>
+              <div class="stats">
+                <span>338 rounds</span><span class="sep">&middot;</span>
+                <span>$6.9B deployed</span><span class="sep">&middot;</span>
+                <span>1,298 investors</span><span class="sep">&middot;</span>
+                <span>Nov 2024 to Apr 2025</span>
+              </div>
+              <div class="tags">
+                <span class="tag">Python</span>
+                <span class="tag">networkx</span>
+                <span class="tag">Chart.js</span>
+                <span class="tag">Messari</span>
+                <span class="tag">CryptoRank</span>
+              </div>
+            </div>
+            <div class="card-actions">
+              <a class="btn btn-primary" href="./vc-investment-analysis/reports/dashboard.html">
+                View Dashboard <span class="arrow">&rarr;</span>
+              </a>
+              <a class="btn btn-ghost" href="./vc-investment-analysis/reports/vc_investment_report.pptx" download>
+                Download .pptx <span class="arrow">&#8595;</span>
+              </a>
+            </div>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="section" id="contact">
+    <div class="container">
+      <div class="contact">
+        <h2>Get in touch</h2>
+        <p>Available for data analyst, business analyst, and research roles. Open to full-time positions and project-based work.</p>
+        <div class="contact-links">
+          <a class="btn btn-primary" href="mailto:lh.phucc@gmail.com">
+            lh.phucc@gmail.com
+          </a>
+          <a class="btn btn-ghost" href="https://github.com/phuchoangle/data-projects" target="_blank" rel="noopener">
+            GitHub Repository <span class="arrow">&rarr;</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="footer">
+  <div class="container">
+    &copy; 2025 Dr. Phuc Le &middot; Built with HTML, CSS &amp; pandas
+    &middot; <a href="https://github.com/phuchoangle/data-projects" target="_blank" rel="noopener">Source on GitHub</a>
+  </div>
+</footer>
+
+<script>
+const btn = document.getElementById('themeBtn');
+const html = document.documentElement;
+
+function applyTheme(dark) {
+  if (dark) {
+    html.setAttribute('data-theme', 'dark');
+    btn.textContent = 'Light';
+    btn.setAttribute('aria-label', 'Switch to light mode');
+  } else {
+    html.removeAttribute('data-theme');
+    btn.textContent = 'Dark';
+    btn.setAttribute('aria-label', 'Switch to dark mode');
+  }
+}
+
+applyTheme(html.getAttribute('data-theme') === 'dark');
+
+btn.addEventListener('click', () => {
+  const isDark = html.getAttribute('data-theme') === 'dark';
+  localStorage.setItem('theme', isDark ? 'light' : 'dark');
+  applyTheme(!isDark);
+});
+</script>
+
+</body>
+</html>
